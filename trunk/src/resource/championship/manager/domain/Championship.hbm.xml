@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<!--
+ User: rro
+ Date: 30.12.2005
+ Time: 22:59:15
+ 
+ @author Roman R&auml;dle
+ @version $Id: Championship.hbm.xml,v 1.1 2006/04/05 09:09:14 raedler Exp $
+-->
+
+<hibernate-mapping default-lazy="false">
+
+    <class name="championship.manager.domain.Championship" table="CMP_CHAMPIONSHIP">
+    
+        <id name="id" type="long" unsaved-value="-1">
+            <column name="ID" not-null="true"/>
+            <generator class="native"/>
+        </id>
+
+        <property name="name" type="string">
+            <column name="NAME" not-null="true"/>
+        </property>
+
+        <property name="groupCount" type="integer">
+            <column name="GROUP_COUNT" not-null="true"/>
+        </property>
+
+        <property name="teamsPerGroup" type="integer">
+            <column name="TEAMS_PER_GROUP" not-null="true"/>
+        </property>
+
+        <property name="intermediateStage" type="boolean">
+            <column name="INTERMEDIATE_STAGE" not-null="true"/>
+        </property>
+
+        <property name="quarterFinal" type="boolean">
+            <column name="QUARTER_FINAL" not-null="true"/>
+        </property>
+
+        <property name="thirdPlaceGame" type="boolean">
+            <column name="THIRD_PLACE_GAME" not-null="true"/>
+        </property>
+
+        <property name="qualifyingTeams" type="integer">
+            <column name="QUALIFYING_TEAMS" not-null="true"/>
+        </property>
+
+        <property name="intermediateStageGroupCount" type="integer">
+            <column name="INTERMEDIATE_STAGE_GROUP_COUNT" not-null="true"/>
+        </property>
+
+        <map name="groups" table="CMP_GROUP" cascade="save-update">
+            <key column="CHAMPIONSHIP_ID" not-null="true"/>
+            <map-key type="string" column="NAME"/>
+            <one-to-many class="championship.manager.domain.Group"/>
+        </map>
+
+        <set name="finalGames" table="CMP_GAME" cascade="all-delete-orphan" sort="championship.manager.util.GamePositionComparator">
+            <key column="CHAMPIONSHIP_ID"/>
+            <one-to-many class="championship.manager.domain.Game"/>
+        </set>
+
+        <set name="linkings" table="CMP_LINKING" cascade="save-update" sort="championship.manager.util.GamePositionComparator">
+            <key column="CHAMPIONSHIP_ID" not-null="true"/>
+            <one-to-many class="championship.manager.domain.Linking"/>
+        </set>
+
+    </class>
+
+</hibernate-mapping>

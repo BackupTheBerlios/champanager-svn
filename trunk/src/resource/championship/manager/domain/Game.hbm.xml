@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<!--
+ User: rro
+ Date: 31.12.2005
+ Time: 15:12:15
+ 
+ @author Roman R&auml;dle
+ @version $Id: Game.hbm.xml,v 1.1 2006/04/05 09:09:14 raedler Exp $
+-->
+
+<hibernate-mapping default-lazy="false">
+
+    <class name="championship.manager.domain.Game" table="CMP_GAME">
+    
+        <id name="id" type="long" unsaved-value="-1">
+            <column name="ID" not-null="true"/>
+            <generator class="native"/>
+        </id>
+
+        <property name="gamePosition" type="integer">
+            <column name="GAME_POSITION" not-null="false"/>
+        </property>
+
+        <property name="time" type="timestamp">
+            <column name="TIME" not-null="false"/>
+        </property>
+
+        <property name="groupName" type="string">
+            <column name="GROUP_NAME" not-null="false"/>
+        </property>
+
+        <property name="gameVsState" type="string">
+            <column name="GAME_VS_STATE" not-null="false"/>
+        </property>
+
+        <property name="type" type="string">
+            <column name="TYPE" not-null="false"/>
+        </property>
+
+        <many-to-one
+                name="hometeam"
+                column="HOMETEAM"
+                class="championship.manager.domain.Team"
+                cascade="none"
+                not-null="true"/>
+
+        <many-to-one
+                name="awayteam"
+                column="AWAYTEAM"
+                class="championship.manager.domain.Team"
+                cascade="none"
+                not-null="true"/>
+
+        <property name="result" type="string">
+            <column name="RESULT" not-null="false"/>
+        </property>
+    
+    </class>
+
+</hibernate-mapping>
