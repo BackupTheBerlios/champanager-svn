@@ -6,13 +6,15 @@ resource.dir=resource
 build.dir=build
 dist.dir=dist
 installer.dir=installer
+database.dir=database
+launch4j.dir=.
 
 # Distribution and installer settings.
-jar.filename=univis-explorer.jar
-installer.filename=univis-explorer-installer.jar
+jar.filename=championship-manager.jar
+installer.filename=championship-manager-installer.jar
 
 # Splash screen off.
 #nosplash
 
-# UniVis Explorer version
-univis_explorer.version=0.3
+# Championship Manager version
+championship_manager.version=0.1
