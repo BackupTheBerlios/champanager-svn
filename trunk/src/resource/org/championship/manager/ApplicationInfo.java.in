@@ -10,7 +10,7 @@
  *
  * Please see COPYING for the complete licence.
  */
-package championship.manager;
+package org.championship.manager;
 
 /**
  * This <code>ApplicationInfo</code> provides version and compile time strings.
