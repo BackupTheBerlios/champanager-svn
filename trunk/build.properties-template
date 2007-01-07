@@ -1,3 +1,11 @@
+# Application settings.
+application.name=Championship Manager
+application.version=1.0.0
+application.version_txt=1.0 RC2
+
+# Splash screen off.
+#nosplash
+
 # Directory settings.
 lib.dir=lib
 src.dir=src
@@ -7,14 +15,15 @@ build.dir=build
 dist.dir=dist
 installer.dir=installer
 database.dir=database
-launch4j.dir=.
+launch4j.dir=lib/launch4j
 
 # Distribution and installer settings.
-jar.filename=championship-manager.jar
-installer.filename=championship-manager-installer.jar
+jar.filename=org.championship-manager.jar
+installer.jar.filename=org.championship-manager-installer.jar
+installer.exe.filename=champanager.exe
 
-# Splash screen off.
-#nosplash
-
-# Championship Manager version
-championship_manager.version=0.1
+# Create the win32 standalone installer version.
+standalone.dir=${installer.dir}/standalone
+win_JRE.path=.
+win_JRE.filename=jre-1_5_0_09-windows-i586-p.exe
+win_JRE=${win_JRE.path}/${win_JRE.filename}

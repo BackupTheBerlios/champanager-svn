@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<!--
+ User: rro
+ Date: 02.01.2006
+ Time: 00:42:03
+ 
+ @author Roman R&auml;dle
+ @version $Id: Linking.hbm.xml,v 1.1 2006/04/05 09:09:14 raedler Exp $
+-->
+
+<hibernate-mapping default-lazy="false">
+
+    <class name="org.championship.manager.domain.Linking" table="CMP_LINKING">
+    
+        <id name="id" type="long" unsaved-value="-1">
+            <column name="ID" not-null="true"/>
+            <generator class="native"/>
+        </id>
+
+        <property name="gamePosition" type="integer">
+            <column name="GAME_POSITION" not-null="true"/>
+        </property>
+
+        <property name="gameType" type="string">
+            <column name="GAME_TYPE" not-null="true"/>
+        </property>
+
+        <property name="link1" type="string">
+            <column name="LINK1" not-null="true"/>
+        </property>
+
+        <property name="link2" type="string">
+            <column name="LINK2" not-null="true"/>
+        </property>
+
+    </class>
+
+</hibernate-mapping>

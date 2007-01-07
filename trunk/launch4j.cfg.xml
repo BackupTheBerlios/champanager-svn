@@ -1,0 +1,32 @@
+<launch4jConfig>
+  <dontWrapJar>true</dontWrapJar>
+  <headerType>0</headerType>
+  <jar>org.championship-manager.jar</jar>
+  <outfile>dist\champanager.exe</outfile>
+  <errTitle>Couldn&apos;t execute Championship Manager</errTitle>
+  <jarArgs></jarArgs>
+  <chdir></chdir>
+  <customProcName>false</customProcName>
+  <stayAlive>false</stayAlive>
+  <icon>environment.ico</icon>
+  <jre>
+    <path>jre1.5.0_07</path>
+    <minVersion>1.5.0_07</minVersion>
+    <maxVersion></maxVersion>
+    <initialHeapSize>0</initialHeapSize>
+    <maxHeapSize>0</maxHeapSize>
+    <args></args>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>1.0.0 RC1</txtFileVersion>
+    <fileDescription>Championship Manager Executable</fileDescription>
+    <copyright>Roman Raedle</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>1.0.0 RC1</txtProductVersion>
+    <productName>Championship Manager</productName>
+    <companyName>Roman Raedle</companyName>
+    <internalName>Champanager Spokane</internalName>
+    <originalFilename>cm.exe</originalFilename>
+  </versionInfo>
+</launch4jConfig>

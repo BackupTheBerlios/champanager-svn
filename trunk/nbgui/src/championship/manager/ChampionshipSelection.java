@@ -28,6 +28,7 @@ public class ChampionshipSelection extends javax.swing.JPanel {
         selectionCB = new javax.swing.JComboBox();
         selectB = new javax.swing.JButton();
         exitB = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         selectionL.setText("Championship Auswahl");
 
@@ -37,44 +38,48 @@ public class ChampionshipSelection extends javax.swing.JPanel {
 
         exitB.setText("Beenden");
 
+        jButton1.setText("Neuer Championship");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
+            .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(selectionCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 250, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(selectionL))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
-                .add(selectB)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(exitB)
+                    .add(selectionCB, 0, 464, Short.MAX_VALUE)
+                    .add(selectionL)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(jButton1)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(selectB)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 59, Short.MAX_VALUE)
+                        .add(exitB)))
                 .addContainerGap())
         );
 
-        layout.linkSize(new java.awt.Component[] {exitB, selectB}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+        layout.linkSize(new java.awt.Component[] {exitB, jButton1, selectB}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
 
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
+            .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(selectionL)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(selectionCB, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(exitB)
+                    .add(jButton1)
                     .add(selectB))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitB;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton selectB;
     private javax.swing.JComboBox selectionCB;
     private javax.swing.JLabel selectionL;

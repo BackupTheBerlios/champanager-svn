@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="UniVis Explorer" default="build">
+<project name="Championship Manager" default="build" basedir=".">
 
-    <property file="build.properties"/>
-
-    <taskdef name="izpack" classpath="${lib.dir}/IzPack/lib/compiler.jar"
-             classname="com.izforge.izpack.ant.IzPackTask"/>
+    <property file="build.properties" />
 
     <target name="splash" unless="nosplash">
-        <splash imageurl="file:${basedir}/src/resource/championship/manager/images/splash_screen.png"/>
+        <property file="build.properties" />
+        <splash imageurl="file:${basedir}/src/resource/org.championship/manager/images/championship_png24.png"/>
     </target>
 
-    <target name="prepare" depends="splash">
+    <target name="init" depends="splash">
+        <copy file="build.properties-template" tofile="build.properties" overwrite="false"/>
+        <property file="build.properties"/>
+    </target>
+
+    <target name="prepare" depends="init">
         <copy file="src/resource/hibernate.cfg.xml-template" tofile="src/resource/hibernate.cfg.xml"/>
         <tstamp>
-            <format property="championship_manager.buildtime" pattern="yyyy-MM-dd HH:mm"/>
+            <format property="application.buildtime" pattern="yyyy-MM-dd HH:mm"/>
         </tstamp>
     </target>
 
     <target name="version-java" depends="prepare">
-        <filter token="CHAMPIONSHIP_MANAGER_VERSION" value="${championship_manager.version}"/>
-        <filter token="COMPILE_TIME" value="${championship_manager.buildtime}"/>
-        <copy file="src/resource/championship/manager/Version.java.in"
-              tofile="src/java/championship/manager/Version.java"
+        <filter token="APPLICATION_NAME" value="${application.name}"/>
+        <filter token="APPLICATION_VERSION" value="${application.version}"/>
+        <filter token="APPLICATION_BUILDTIME" value="${application.buildtime}"/>
+        <filter token="APPLICATION_AUTHORS" value="${application.authors}"/>
+        <copy file="src/resource/org.championship/manager/ApplicationInfo.java.in"
+              tofile="src/java/org.championship/manager/ApplicationInfo.java"
               filtering="yes"
               overwrite="true"/>
     </target>
 
     <target name="run" depends="build-dist">
-        <java classname="championship.manager." fork="true">
+        <java classname="org.championship.manager.ChampionshipSelection" fork="true">
             <classpath>
                 <fileset dir="${dist.dir}" includes="**/*.jar"/>
             </classpath>
@@ -37,7 +42,7 @@
 
     <target name="clean-all" depends="clean-build,clean-dist,clean-installer"/>
 
-    <target name="build" depends="version-java">
+    <target name="build" depends="clean-build,version-java">
         <mkdir dir="${build.dir}"/>
         <javac debug="off" target="1.5" source="1.5" srcdir="${src.dir}/${java.dir}" destdir="${build.dir}">
             <compilerarg line="-Xlint:unchecked"/>
@@ -46,39 +51,127 @@
             </classpath>
         </javac>
         <copy todir="${build.dir}">
-            <fileset dir="${src.dir}/${resource.dir}" includes="**/*"/>
+            <fileset dir="${src.dir}/${resource.dir}" excludes="**/*-template"/>
         </copy>
     </target>
 
-    <target name="clean-build" depends="splash">
+    <target name="clean-build" depends="init">
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="build-dist" depends="build">
+    <target name="build-dist" depends="clean-dist,build">
         <mkdir dir="${dist.dir}"/>
         <jar basedir="${build.dir}" destfile="${dist.dir}/${jar.filename}" manifest="src/META-INF/Manifest.mf">
             <fileset dir="${build.dir}"/>
         </jar>
         <copy todir="${dist.dir}/lib" flatten="true">
-            <fileset dir="${lib.dir}" includes="**/*.jar"/>
+            <fileset dir="${lib.dir}" includes="**/*.jar" excludes="**/IzPack/**/*.jar"/>
+        </copy>
+        <copy todir="${dist.dir}/${database.dir}">
+            <fileset dir="${database.dir}"/>
         </copy>
     </target>
 
-    <target name="clean-dist">
+    <target name="clean-dist" depends="init">
         <delete dir="${dist.dir}"/>
     </target>
 
-    <target name="build-installer" depends="build-dist">
+    <target name="test" depends="init">
+        <echo message="${basedir}" />
+
+        <taskdef name="launch4j"
+                 classname="net.sf.launch4j.ant.Launch4jTask"
+                 classpath="${launch4j.dir}/launch4j.jar
+                 :${launch4j.dir}/lib/xstream.jar"/>
+
+        <launch4j configfile="launch4j.cfg.xml"
+                  outfile="${dist.dir}/${installer.exe.filename}"/>
+    </target>
+
+    <target name="build-installer" depends="clean-installer,build-dist">
         <mkdir dir="${installer.dir}"/>
+
+        <taskdef name="launch4j"
+                 classname="net.sf.launch4j.ant.Launch4jTask"
+                 classpath="${launch4j.dir}/launch4j.jar
+                 :${launch4j.dir}/lib/xstream.jar"/>
+
+        <launch4j configfile="launch4j.cfg.xml"
+                  outfile="${dist.dir}/${installer.exe.filename}"/>
+
+        <taskdef name="izpack"
+                 classpath="${lib.dir}/IzPack/lib/compiler.jar"
+                 classname="com.izforge.izpack.ant.IzPackTask"/>
+
         <izpack input="build-install.xml"
-                output="${installer.dir}/${installer.filename}"
+                output="${installer.dir}/${installer.jar.filename}"
                 installerType="standard"
                 basedir="."
                 izPackDir="${lib.dir}/IzPack"/>
     </target>
 
-    <target name="clean-installer">
+    <target name="clean-installer" depends="init">
         <delete dir="${installer.dir}"/>
+    </target>
+
+    <target name="build-win32-standalone" depends="build-installer">
+
+        <echo message="Deleting the existing directory ${basedir}/${standalone.dir}..."/>
+        <delete dir="${standalone.dir}"/>
+
+        <echo message="Creating directories ${basedir}/${standalone.dir} and ${basedir}/${standalone.dir}/jre..."/>
+        <mkdir dir="${standalone.dir}"/>
+        <mkdir dir="${standalone.dir}/build"/>
+        <mkdir dir="${standalone.dir}/build/jre"/>
+
+        <echo message="Copying required files to ${standalone.dir}..."/>
+        <copy file="${installer.dir}/${installer.jar.filename}" todir="${standalone.dir}/build"/>
+        <copy todir="${standalone.dir}/build">
+            <fileset dir="${lib.dir}/IzPack-launcher"/>
+        </copy>
+        <copy file="${win_JRE}" todir="${standalone.dir}/build/jre"/>
+
+        <echo message="Creating launcher.ini..."/>
+        <echo file="${standalone.dir}/build/launcher.ini" append="false"># Global entries, can be overridden by specific
+            ones.
+            jar = ${installer.jar.filename}
+            download = http://www.java.com/
+
+            # Win32 specific entries
+            [win32]
+            jre = jre/${win_JRE.filename}
+        </echo>
+
+        <echo message="Copying required SFX file to ${standalone.dir}..."/>
+        <copy file="${lib.dir}/7z/7zS.sfx" todir="${standalone.dir}"/>
+
+        <echo message="Creating config.txt..."/>
+        <echo file="${standalone.dir}/config.txt" append="false">;!@Install@!UTF-8!
+            Title="${application.name} ${application.version_txt}"
+            BeginPrompt="Do you want to install ${application.name} ${application.version_txt}?"
+            RunProgram="launcher-Win32.exe"
+            ;!@InstallEnd@!
+        </echo>
+
+        <echo message="Copying ${7z.exe} to ${standalone.dir}/${standalone.build.dir}..."/>
+
+        <copy file="${lib.dir}/7z/${7z.exe}" todir="${standalone.build.dir}"/>
+
+        <exec dir="${standalone.dir}/build" executable="cmd.exe">
+            <arg line="/c ${7z.exe} a -r ${7z.filename} *.* -x!${7z.exe}"/>
+        </exec>
+
+        <move file="${standalone.build.dir}/${7z.filename}" todir="${standalone.dir}"/>
+
+        <exec dir="${standalone.dir}" executable="cmd.exe">
+            <arg line="/c copy /B 7zS.sfx + config.txt + ${7z.filename} ${standalone.filename}"/>
+        </exec>
+
+        <move file="${standalone.dir}/${standalone.filename}" todir="${installer.dir}"/>
+
+        <echo message="Cleaning ${standalone.dir} directory..."/>
+        <delete dir="${standalone.dir}"/>
+
     </target>
 
 </project>

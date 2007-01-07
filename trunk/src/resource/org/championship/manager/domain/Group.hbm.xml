@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<!--
+ User: rro
+ Date: 31.12.2005
+ Time: 00:18:18
+ 
+ @author Roman R&auml;dle
+ @version $Id: Group.hbm.xml,v 1.1 2006/04/05 09:09:14 raedler Exp $
+-->
+
+<hibernate-mapping default-lazy="false">
+
+    <class name="org.championship.manager.domain.Group" table="CMP_GROUP">
+    
+        <id name="id" type="long" unsaved-value="-1">
+            <column name="ID" not-null="true"/>
+            <generator class="native"/>
+        </id>
+
+        <property name="name" type="string" insert="false" update="false">
+            <column name="NAME" not-null="true"/>
+        </property>
+
+        <one-to-one name="groupTable" class="org.championship.manager.domain.Table" cascade="all-delete-orphan"/>
+
+        <set name="teams" table="CMP_TEAM" cascade="all-delete-orphan" sort="org.championship.manager.util.NameComparator">
+            <key column="GROUP_ID"/>
+            <one-to-many class="org.championship.manager.domain.Team"/>
+        </set>
+
+        <set name="games" table="CMP_GAME" cascade="all-delete-orphan" sort="org.championship.manager.util.GamePositionComparator">
+            <key column="GROUP_ID"/>
+            <one-to-many class="org.championship.manager.domain.Game"/>
+        </set>
+
+    </class>
+
+</hibernate-mapping>

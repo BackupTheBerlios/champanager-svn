@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!--
+ User: rro
+ Date: 02.01.2006
+ Time: 01:34:18
+ 
+ @author Roman R&auml;dle
+ @version $Id: Table.hbm.xml,v 1.1 2006/04/05 09:09:14 raedler Exp $
+-->
+
+<hibernate-mapping default-lazy="false">
+
+    <class name="org.championship.manager.domain.Table" table="CMP_TABLE">
+
+        <id name="id" column="ID">
+            <generator class="foreign">
+                <param name="property">group</param>
+            </generator>
+        </id>
+
+        <one-to-one name="group" class="org.championship.manager.domain.Group" cascade="save-update"/>
+
+        <list name="entries" table="CMP_TABLE_ENTRY" cascade="save-update">
+            <key column="TABLE_ID" not-null="true"/>
+            <list-index column="placing"/>
+            <one-to-many class="org.championship.manager.domain.TableEntry"/>
+        </list>
+
+    </class>
+
+    <class name="org.championship.manager.domain.TableEntry" table="CMP_TABLE_ENTRY">
+
+        <id name="id" type="long" unsaved-value="-1">
+            <column name="ID" not-null="true"/>
+            <generator class="native"/>
+        </id>
+
+        <many-to-one name="table" column="TABLE_ID" class="org.championship.manager.domain.Table" insert="false" update="false"/>
+
+        <many-to-one name="team" column="TEAM_ID" class="org.championship.manager.domain.Team" cascade="none"/>
+
+        <property name="initial" type="boolean">
+            <column name="INITIAL" not-null="true"/>
+        </property>
+
+        <property name="gameCount" type="integer">
+            <column name="GAME_COUNT" not-null="true"/>
+        </property>
+
+        <property name="goals" type="integer">
+            <column name="GOALS" not-null="true"/>
+        </property>
+
+        <property name="goalsAgainst" type="integer">
+            <column name="GOALS_AGAINST" not-null="true"/>
+        </property>
+
+        <property name="points" type="integer">
+            <column name="POINTS" not-null="true"/>
+        </property>
+
+    </class>
+
+</hibernate-mapping>

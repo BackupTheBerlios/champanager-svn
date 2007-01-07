@@ -4,13 +4,11 @@
 <installation version="1.0">
 
     <info>
-        <appname>UniVis Explorer</appname>
-        <appversion>0.3</appversion>
+        <appname>Championship Manager</appname>
+        <appversion>0.1</appversion>
         <authors>
             <author name="Rädle Roman" email="raedler@inf.uni-konstanz.de"/>
-            <author name="Weiler Andreas" email="weiler@inf.uni-konstanz.de"/>
         </authors>
-        <url>http://phobos22.inf.uni-konstanz.de/univis</url>
         <javaversion>1.5</javaversion>
     </info>
 
@@ -23,7 +21,6 @@
 
     <locale>
     	<langpack iso3="deu"/>
-        <!--<langpack iso3="eng"/>-->
     </locale>
 
     <resources></resources>
@@ -43,19 +40,18 @@
 
     <packs>
         <pack name="Core" required="yes">
-            <description>Install the Economy Bill Agenda core files.</description>
+            <description>Install the Championship Manager core files.</description>
             <fileset dir="dist" targetdir="$INSTALL_PATH">
-                <include name="**/*"/>
+                <include name="**/*.jar"/>
+                <include name="**/*.exe"/>
             </fileset>
         </pack>
-        <!--
         <pack name="Database" required="no">
-            <description>Install the Economy Bill Agenda database.</description>
-            <fileset dir="build/database" targetdir="$INSTALL_PATH">
+            <description>Install the Championship Manager database.</description>
+            <fileset dir="dist/database" targetdir="$INSTALL_PATH/database">
                 <include name="**/*"/>
             </fileset>
         </pack>
-        -->
         <!--
         <pack name="MySQL Installation" required="no">
             <description>INSTALL help files.</description>

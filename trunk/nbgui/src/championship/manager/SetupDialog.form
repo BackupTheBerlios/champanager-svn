@@ -14,12 +14,12 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="setupTP" alignment="1" max="32767" attributes="0"/>
+                  <Component id="setupTP" alignment="1" pref="301" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
+                      <Component id="okB" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="cancelB" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="okB" linkSize="1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Component id="applyB" linkSize="1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -35,8 +35,8 @@
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="applyB" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="okB" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelB" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="okB" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -46,12 +46,12 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="okB">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Abbrechen"/>
+        <Property name="text" type="java.lang.String" value="OK"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="cancelB">
       <Properties>
-        <Property name="text" type="java.lang.String" value="OK"/>
+        <Property name="text" type="java.lang.String" value="Abbrechen"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="applyB">
@@ -62,80 +62,6 @@
     <Container class="javax.swing.JTabbedPane" name="setupTP">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="championship.manager.ChampionshipSetupPanel" name="championshipSetupP">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Turnier">
-                <Property name="tabTitle" type="java.lang.String" value="Turnier"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="championship.manager.GroupSetupPanel" name="groupSetupP">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Gruppen">
-                <Property name="tabTitle" type="java.lang.String" value="Gruppen"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="championship.manager.GroupSetupPanel" name="intermediateStageGroupSetupP">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Gruppen Zwischenrunde">
-                <Property name="tabTitle" type="java.lang.String" value="Gruppen Zwischenrunde"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="championship.manager.TeamLinkingPanel" name="intermediateStageLinkingP">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Zwischenrunde">
-                <Property name="tabTitle" type="java.lang.String" value="Zwischenrunde"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="championship.manager.TeamLinkingPanel" name="quarterFinalLinkingP">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Viertelfinale">
-                <Property name="tabTitle" type="java.lang.String" value="Viertelfinale"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="championship.manager.TeamLinkingPanel" name="semiFinalLinkingP">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Halbfinale">
-                <Property name="tabTitle" type="java.lang.String" value="Halbfinale"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="championship.manager.TeamLinkingPanel" name="thirdPlaceGameLinkingP">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Spiel um Platz 3">
-                <Property name="tabTitle" type="java.lang.String" value="Spiel um Platz 3"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="championship.manager.TeamLinkingPanel" name="finalLinkingP">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Finale">
-                <Property name="tabTitle" type="java.lang.String" value="Finale"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-        </Component>
-      </SubComponents>
     </Container>
   </SubComponents>
 </Form>
