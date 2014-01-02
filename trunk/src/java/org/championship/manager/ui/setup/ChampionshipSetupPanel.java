@@ -1,14 +1,14 @@
 package org.championship.manager.ui.setup;
 
-import org.championship.manager.domain.Championship;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+
 import org.championship.manager.MainFrame;
+import org.championship.manager.domain.Championship;
 import org.championship.manager.ui.Changable;
-
-import javax.swing.*;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-
-import sun.awt.im.InputMethodAdapter;
 
 // TODO: document me!!!
 

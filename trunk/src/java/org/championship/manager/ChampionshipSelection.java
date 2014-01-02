@@ -23,8 +23,6 @@ import org.championship.manager.splashscreen.FadingSplashScreen;
 
 import javax.swing.*;
 
-import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
-
 /**
  * @author Roman Georg R�dle
  */
@@ -33,9 +31,9 @@ public class ChampionshipSelection extends javax.swing.JFrame {
     public static void main(String[] args) {
 
         try {
-            UIManager.setLookAndFeel(new WindowsLookAndFeel());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
-        catch (UnsupportedLookAndFeelException e) {
+        catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
 

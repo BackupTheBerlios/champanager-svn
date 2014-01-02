@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="src" path="src/resource"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="lib/antlr-2.7.5H3/antlr-2.7.5H3.jar"/>
+	<classpathentry kind="lib" path="lib/asm/asm.jar"/>
+	<classpathentry kind="lib" path="lib/cglib-2.1/cglib-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-2.1.1/commons-collections-2.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.0.4/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.6.1/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate3.0.5/hibernate3.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/hsqldb/hsqldb.jar"/>
+	<classpathentry kind="lib" path="lib/jta/jta.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.9/log4j-1.2.9.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-3.1.7-bin/mysql-connector-java-3.1.7-bin.jar"/>
+	<classpathentry kind="lib" path="lib/swing-layout-0.7/swing-layout-0.7.jar"/>
+	<classpathentry kind="lib" path="lib/xstream-1.3.1/xstream-1.3.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

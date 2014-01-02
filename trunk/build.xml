@@ -44,7 +44,7 @@
 
     <target name="build" depends="clean-build,version-java">
         <mkdir dir="${build.dir}"/>
-        <javac debug="off" target="1.5" source="1.5" srcdir="${src.dir}/${java.dir}" destdir="${build.dir}">
+        <javac debug="off" target="1.7" source="1.7" srcdir="${src.dir}/${java.dir}" destdir="${build.dir}">
             <compilerarg line="-Xlint:unchecked"/>
             <classpath>
                 <fileset dir="${lib.dir}" includes="**/*.jar"/>

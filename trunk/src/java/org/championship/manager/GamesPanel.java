@@ -47,8 +47,7 @@ public class GamesPanel extends javax.swing.JPanel {
     private DefaultTableModel gamesTM;
     private Vector columnIdentifiers;
     private JButton calculateB;
-    private JButton saveB;
-    private JButton loadB;
+    private JButton refreshB;
 
     /**
      *
@@ -143,19 +142,8 @@ public class GamesPanel extends javax.swing.JPanel {
             }
         });
 
-        saveB = new JButton();
-        saveB.addActionListener(new ActionListener() {
-
-            /**
-             * @see ActionListener#actionPerformed(java.awt.event.ActionEvent)
-             */
-            public void actionPerformed(ActionEvent e) {
-                saveTableToGames();
-            }
-        });
-
-        loadB = new JButton();
-        loadB.addActionListener(new ActionListener() {
+        refreshB = new JButton();
+        refreshB.addActionListener(new ActionListener() {
 
             /**
              * @see ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -205,7 +193,7 @@ public class GamesPanel extends javax.swing.JPanel {
                     if (hometeam != null && awayteam != null) {
 
                         if (!hometeam.getGroupName().equals(awayteam.getGroupName())) {
-                            JOptionPane.showMessageDialog(mainFrame, "Diese Paarung ist nicht mï¿½glich", "Konfigurationsfehler", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(mainFrame, "Diese Paarung ist nicht möglich", "Konfigurationsfehler", JOptionPane.ERROR_MESSAGE);
 
                             gamesTM.setValueAt(null, row, e.getColumn());
 
@@ -259,7 +247,8 @@ public class GamesPanel extends javax.swing.JPanel {
         gamesSP.setViewportView(gamesT);
 
         if ("preliminary_round".equals(gameType)) {
-            remove(calculateB);
+        	calculateB.setVisible(false);
+        	calculateB.setEnabled(false);
             loadGamesToTable();
         }
         else if ("intermediate_stage".equals(gameType)) calculateB.setText("Zwischenrunde berechnen");
@@ -268,9 +257,7 @@ public class GamesPanel extends javax.swing.JPanel {
         else if ("third_place_game".equals(gameType)) calculateB.setText("Spiel um Platz 3 berechnen");
         else if ("final".equals(gameType)) calculateB.setText("Finale berechnen");
 
-        saveB.setText("Speichern");
-
-        loadB.setText("Laden");
+        refreshB.setText("Aktualisieren");
     }
 
     private void calculate() {
@@ -395,24 +382,21 @@ public class GamesPanel extends javax.swing.JPanel {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                 .add(gamesSP, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                                 .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
-                                .add(calculateB)
+                                .add(refreshB)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(saveB)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(loadB)))
+                                .add(calculateB)))
                         .addContainerGap())
         );
 
-        layout.linkSize(new java.awt.Component[]{loadB, calculateB, saveB}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+        layout.linkSize(new java.awt.Component[]{refreshB, calculateB}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
 
         layout.setVerticalGroup(
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                .add(calculateB)
-                                .add(saveB)
-                                .add(loadB))
+                                .add(refreshB)
+                                .add(calculateB))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(gamesSP, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                         .addContainerGap())
@@ -516,13 +500,27 @@ public class GamesPanel extends javax.swing.JPanel {
         int gamesCount = 0;
 
         if ("preliminary_round".equals(gameType)) {
-            int teams = championship.getTeamsPerGroup();
+        	int teams = championship.getTeamsPerGroup();
             for (String groupName : championship.getPreliminaryRoundGroupDefinitions()) {
-                for (int i = 1; i <= teams; i++) {
-                    for (int j = i + 1; j <= teams; j++) {
-                        ++gamesCount;
-                    }
-                }
+            	
+            	Group group = championship.getGroup(groupName);
+
+				if (group != null)
+				{
+					int teamCount = 0;
+					for (Team team : group.getTeams()) {
+						if (!"".equals(team.getName()))
+							++teamCount;
+					}
+					
+					gamesCount += (teamCount * (teamCount - 1)) / 2;
+				}
+				else
+					for (int i = 1; i <= teams; i++) {
+						for (int j = i + 1; j <= teams; j++) {
+							++gamesCount;
+						}
+					}
             }
         }
         else if ("intermediate_stage".equals(gameType)) {
@@ -609,7 +607,7 @@ public class GamesPanel extends javax.swing.JPanel {
 
                 // Get the table of that group.
                 Table groupTable = tmpGroup.getGroupTable();
-
+                
                 // Get the team of that group that is placed at the
                 // placing extracted before.
                 Team originalTeam = groupTable.getTeamAtPlacing(tmpPlacing);

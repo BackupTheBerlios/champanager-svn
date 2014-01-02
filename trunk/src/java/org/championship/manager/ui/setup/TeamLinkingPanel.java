@@ -19,7 +19,7 @@ import org.championship.manager.util.VectorUtils;
 import org.championship.manager.MainFrame;
 
 /**
- * @author Roman Georg Rï¿½dle
+ * @author Roman Georg Rädle
  */
 public class TeamLinkingPanel extends javax.swing.JPanel {
 
